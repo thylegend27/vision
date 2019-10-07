@@ -6,14 +6,19 @@ last([H|T], [H|R], X) :-
   last(T, R, X).
 
 % uppgift 4
+visited = [].
+addToVisit(In, [In|Visited]).
+
+
 partstring([], _) :- !, false.
-partstring(X, X).
+partstring(X, X) :- addToVisit(X, _), +/member(X, Visited).
 partstring([_|T], Out) :-
   partstring(T, Out).
+  
 partstring(In, Out) :-
   last(In, T, _),
   partstring(T, Out).
-
+  
 % uppgift 5
 permute([], []).
 permute(In, [X|R]) :-
